@@ -51,10 +51,10 @@ public class ReportingStructureServiceImpl implements ReportingStructureService 
      */
     private void findReports(Employee employee, Set<String> allReports) {
         if (employee.getDirectReports() != null) {
-            for (Employee report: employee.getDirectReports()) {
+            for (Employee report: employee.getDirectReports()) { //look at each direct report of the employee
                 if (!allReports.contains(report.getEmployeeId())) { //if they are already in the Set we don't need to look at them again
-                    allReports.add(report.getEmployeeId());
-                    findReports(employeeService.read(report.getEmployeeId()), allReports);
+                    allReports.add(report.getEmployeeId()); //add report to set
+                    findReports(employeeService.read(report.getEmployeeId()), allReports); //pass report to this method to find their direct reports
                 }
             }
         }

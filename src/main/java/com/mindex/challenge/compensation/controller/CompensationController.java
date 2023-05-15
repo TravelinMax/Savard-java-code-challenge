@@ -30,6 +30,9 @@ public class CompensationController {
         return compensationService.read(id);
     }
 
+    /**
+     * added just for fun
+     */
     @GetMapping("/compensation")
     public List<Compensation> readAll() {
         LOG.debug("Received read all compensation request");

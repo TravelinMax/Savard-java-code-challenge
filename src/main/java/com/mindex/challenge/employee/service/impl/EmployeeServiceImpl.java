@@ -45,7 +45,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employee;
     }
 
-    //I'm just having fun
+    /**
+     * added just for fun
+     */
     public List<Employee> readAll() {
         LOG.debug("Finding all employees");
 

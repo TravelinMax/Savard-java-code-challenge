@@ -23,6 +23,9 @@ public class EmployeeController {
         return employeeService.create(employee);
     }
 
+    /**
+     * added just for fun
+     */
     @GetMapping("/employee")
     public List<Employee> readAll() {
         LOG.debug("Received read all employees request");
