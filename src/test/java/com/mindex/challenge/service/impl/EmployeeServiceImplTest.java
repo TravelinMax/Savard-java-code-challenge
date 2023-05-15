@@ -42,11 +42,8 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void testCreateReadUpdate() {
-        Employee testEmployee = new Employee();
-        testEmployee.setFirstName("John");
-        testEmployee.setLastName("Doe");
-        testEmployee.setDepartment("Engineering");
-        testEmployee.setPosition("Developer");
+        Employee testEmployee = new Employee("", "John", "Doe", "Developer", "Engineering", null);
+
 
         // Create checks
         Employee createdEmployee = restTemplate.postForEntity(employeeUrl, testEmployee, Employee.class).getBody();
@@ -62,7 +59,8 @@ public class EmployeeServiceImplTest {
 
 
         // Update checks
-        readEmployee.setPosition("Development Manager");
+        readEmployee = new Employee(readEmployee.getEmployeeId(), readEmployee.getFirstName(), readEmployee.getLastName(),
+                "Development Manager", readEmployee.getDepartment(), readEmployee.getDirectReports());
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

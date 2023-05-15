@@ -32,14 +32,11 @@ public class ReportingStructureServiceImpl implements ReportingStructureService 
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid employeeId: " + id);
         }
 
-        ReportingStructure reportingStructure = new ReportingStructure();
-        reportingStructure.setEmployee(employee);
-
         Set<String> allReports = new HashSet<>();
         findReports(employee, allReports);
 
         //the number of reports is the final size of the set
-        reportingStructure.setNumberOfReports(allReports.size());
+        ReportingStructure reportingStructure = new ReportingStructure(employee, allReports.size());
 
         return reportingStructure;
     }
@@ -49,7 +46,7 @@ public class ReportingStructureServiceImpl implements ReportingStructureService 
     Add each report in the tree to a set to keep track of the number of reports and make
     sure we don't double count employees who appear in the tree of reports twice.
      */
-    private void findReports(Employee employee, Set<String> allReports) {
+    private void findReports(final Employee employee, Set<String> allReports) {
         if (employee.getDirectReports() != null) {
             for (Employee report: employee.getDirectReports()) { //look at each direct report of the employee
                 if (!allReports.contains(report.getEmployeeId())) { //if they are already in the Set we don't need to look at them again

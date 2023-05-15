@@ -56,11 +56,7 @@ public class ChallengeApplicationTests {
 	@Test
 	public void createCompensation() {
 		String employeeID = "16a596ae-edd3-4847-99fe-c4518e82c86f";
-		Compensation comp = new Compensation();
-		comp.setEmployee(new Employee());
-		comp.getEmployee().setEmployeeId(employeeID);
-		comp.setSalary(12345);
-		comp.setEffectiveDate(LocalDate.of(2023, 5, 14));
+		Compensation comp = new Compensation(new Employee(employeeID, null, null, null, null, null), 12345, LocalDate.of(2023, 5, 14));
 
 		HttpHeaders headers = new HttpHeaders();
 		HttpEntity<Compensation> requestEntity = new HttpEntity<>(comp, headers);
@@ -78,11 +74,7 @@ public class ChallengeApplicationTests {
 
 		//////////////PREPARE DATABASE FOR TEST///////////////
 		{
-			Compensation comp = new Compensation();
-			comp.setEmployee(new Employee());
-			comp.getEmployee().setEmployeeId(employeeID);
-			comp.setSalary(12345);
-			comp.setEffectiveDate(LocalDate.of(2023, 5, 14));
+			Compensation comp = new Compensation(new Employee(employeeID, null, null, null, null, null), 12345, LocalDate.of(2023, 5, 14));
 
 			HttpHeaders headers = new HttpHeaders();
 			HttpEntity<Compensation> requestEntity = new HttpEntity<>(comp, headers);
