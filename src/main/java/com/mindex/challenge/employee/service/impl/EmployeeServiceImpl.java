@@ -25,9 +25,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee create(Employee employee) {
         LOG.debug("Creating employee [{}]", employee);
 
-        Employee emp = new Employee(UUID.randomUUID().toString(), employee.getFirstName(), employee.getLastName(), employee.getPosition(), employee.getDepartment(), employee.getDirectReports());
+        Employee empl = new Employee(UUID.randomUUID().toString(), employee);
 
-        return employeeRepository.insert(emp);
+        return employeeRepository.insert(empl);
     }
 
     @Override

@@ -44,7 +44,7 @@ public class EmployeeController {
     public Employee update(@PathVariable String id, @RequestBody Employee employee) {
         LOG.debug("Received employee update request for id [{}] and employee [{}]", id, employee);
 
-        Employee emp = new Employee(id, employee.getFirstName(), employee.getLastName(), employee.getPosition(), employee.getDepartment(), employee.getDirectReports());
-        return employeeService.update(emp);
+        Employee empl = new Employee(id, employee);
+        return employeeService.update(empl);
     }
 }

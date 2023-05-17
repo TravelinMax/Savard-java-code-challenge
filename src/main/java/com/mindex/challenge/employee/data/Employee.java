@@ -19,6 +19,18 @@ public class Employee {
         this.directReports = directReports;
     }
 
+    /**
+     * basically a copy constructor
+     */
+    public Employee(String employeeId, Employee employee) {
+        this.employeeId = employeeId;
+        this.firstName = employee.getFirstName();
+        this.lastName = employee.getLastName();
+        this.position = employee.getPosition();
+        this.department = employee.getDepartment();
+        this.directReports = employee.getDirectReports();
+    }
+
     public String getEmployeeId() {
         return employeeId;
     }
