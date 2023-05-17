@@ -42,7 +42,7 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void testCreateReadUpdate() {
-        Employee testEmployee = new Employee("", "John", "Doe", "Developer", "Engineering", null);
+        Employee testEmployee = new Employee(null, "John", "Doe", "Developer", "Engineering", null);
 
 
         // Create checks
