@@ -36,8 +36,8 @@ public class EmployeeServiceImplTest {
 
     @Before
     public void setup() {
-        employeeUrl = "http://localhost:" + port + "/employee";
-        employeeIdUrl = "http://localhost:" + port + "/employee/{id}";
+        employeeUrl = "http://localhost:" + port + "/employees";
+        employeeIdUrl = "http://localhost:" + port + "/employees/{id}";
     }
 
     @Test

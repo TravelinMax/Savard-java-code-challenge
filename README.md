@@ -13,16 +13,16 @@ The following endpoints are available to use:
 ```
 * CREATE
     * HTTP Method: POST 
-    * URL: localhost:8080/employee
+    * URL: localhost:8080/employees
     * PAYLOAD: Employee
     * RESPONSE: Employee
 * READ
     * HTTP Method: GET 
-    * URL: localhost:8080/employee/{id}
+    * URL: localhost:8080/employees/{id}
     * RESPONSE: Employee
 * UPDATE
     * HTTP Method: PUT 
-    * URL: localhost:8080/employee/{id}
+    * URL: localhost:8080/employees/{id}
     * PAYLOAD: Employee
     * RESPONSE: Employee
 ```

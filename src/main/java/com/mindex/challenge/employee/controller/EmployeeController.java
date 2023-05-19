@@ -16,7 +16,7 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @PostMapping("/employee")
+    @PostMapping("/employees")
     public Employee create(@RequestBody Employee employee) {
         LOG.debug("Received employee create request for [{}]", employee);
 
@@ -26,21 +26,21 @@ public class EmployeeController {
     /**
      * added just for fun
      */
-    @GetMapping("/employee")
+    @GetMapping("/employees")
     public List<Employee> readAll() {
         LOG.debug("Received read all employees request");
 
         return employeeService.readAll();
     }
 
-    @GetMapping("/employee/{id}")
+    @GetMapping("/employees/{id}")
     public Employee read(@PathVariable String id) {
         LOG.debug("Received employee read request for id [{}]", id);
 
         return employeeService.read(id);
     }
 
-    @PutMapping("/employee/{id}")
+    @PutMapping("/employees/{id}")
     public Employee update(@PathVariable String id, @RequestBody Employee employee) {
         LOG.debug("Received employee update request for id [{}] and employee [{}]", id, employee);
 
