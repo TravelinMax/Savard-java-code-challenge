@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -73,24 +74,17 @@ public class ChallengeApplicationTests {
 	}
 
 	@Test
-	public void getCompensation() {
+	public void getCompensationForValidEmployeeWithNoCompensations() {
 		String employeeID = "16a596ae-edd3-4847-99fe-c4518e82c86f";
+		ResponseEntity<Compensation[]> responseEntity = this.restTemplate.getForEntity("http://localhost:" + port + "/compensations/" + employeeID, Compensation[].class, new HashMap<>());
+		Compensation[] c = responseEntity.getBody();
 
-		//////////////PREPARE DATABASE FOR TEST///////////////
-		{
-			Compensation comp = new Compensation();
-			comp.setEmployee(new Employee());
-			comp.getEmployee().setEmployeeId(employeeID);
-			comp.setSalary(12345);
-			comp.setEffectiveDate(LocalDate.of(2023, 5, 14));
+		assertEquals(0, c.length);
+	}
 
-			HttpHeaders headers = new HttpHeaders();
-			HttpEntity<Compensation> requestEntity = new HttpEntity<>(comp, headers);
-
-			ResponseEntity<Compensation> responseEntity = this.restTemplate.postForEntity("http://localhost:" + port + "/compensations", requestEntity, Compensation.class, new HashMap<>());
-		}
-		//////////////////////////////////////////////////////
-
+	@Test
+	public void getCompensationForValidEmployeeWithOneCompensation() {
+		String employeeID = "16a596ae-edd3-4847-99fe-c4518e82c86f";
 		ResponseEntity<Compensation[]> responseEntity = this.restTemplate.getForEntity("http://localhost:" + port + "/compensations/" + employeeID, Compensation[].class, new HashMap<>());
 		Compensation[] c = responseEntity.getBody();
 		assertEquals(1, c.length);
@@ -102,9 +96,9 @@ public class ChallengeApplicationTests {
 	@Test
 	public void getCompensationInvalidEmployeeID() {
 		String employeeID = "fffff";
-		ResponseEntity<Compensation[]> responseEntity = this.restTemplate.getForEntity("http://localhost:" + port + "/compensations/" + employeeID, Compensation[].class, new HashMap<>());
-		Compensation[] c = responseEntity.getBody();
+		ResponseEntity<Compensation> responseEntity = this.restTemplate.getForEntity("http://localhost:" + port + "/compensations/" + employeeID, Compensation.class, new HashMap<>());
+		HttpStatus status = responseEntity.getStatusCode();
 
-		assertEquals(0, c.length);
+		assertEquals(HttpStatus.NOT_FOUND, status);
 	}
 }
