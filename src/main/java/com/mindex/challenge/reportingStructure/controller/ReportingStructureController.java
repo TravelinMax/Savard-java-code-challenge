@@ -14,7 +14,7 @@ public class ReportingStructureController {
     @Autowired
     private ReportingStructureService reportingStructureService;
 
-    @GetMapping("/reportingStructure/{id}")
+    @GetMapping("/reportingStructures/{id}")
     public ReportingStructure read(@PathVariable String id) {
         LOG.debug("Received reporting structure read request for id [{}]", id);
 

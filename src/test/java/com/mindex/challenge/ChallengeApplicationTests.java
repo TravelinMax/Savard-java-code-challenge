@@ -38,7 +38,7 @@ public class ChallengeApplicationTests {
 	@Test
 	public void getReportingStructureForMultiLevelReports() {
 		String employeeID = "16a596ae-edd3-4847-99fe-c4518e82c86f";
-		ResponseEntity<ReportingStructure> responseEntity = this.restTemplate.getForEntity("http://localhost:" + port + "/reportingStructure/" + employeeID, ReportingStructure.class, new HashMap<>());
+		ResponseEntity<ReportingStructure> responseEntity = this.restTemplate.getForEntity("http://localhost:" + port + "/reportingStructures/" + employeeID, ReportingStructure.class, new HashMap<>());
 		ReportingStructure rs = responseEntity.getBody();
 		assertEquals(employeeID, rs.getEmployee().getEmployeeId());
 		assertEquals(4, rs.getNumberOfReports());
@@ -47,7 +47,7 @@ public class ChallengeApplicationTests {
 	@Test
 	public void getReportingStructureForInvalidID() {
 		String employeeID = "ffff";
-		ResponseEntity<ReportingStructure> responseEntity = this.restTemplate.getForEntity("http://localhost:" + port + "/reportingStructure/" + employeeID, ReportingStructure.class, new HashMap<>());
+		ResponseEntity<ReportingStructure> responseEntity = this.restTemplate.getForEntity("http://localhost:" + port + "/reportingStructures/" + employeeID, ReportingStructure.class, new HashMap<>());
 		ReportingStructure rs = responseEntity.getBody();
 		assertEquals(null, rs.getEmployee());
 		assertEquals(0, rs.getNumberOfReports());
@@ -65,7 +65,7 @@ public class ChallengeApplicationTests {
 		HttpHeaders headers = new HttpHeaders();
 		HttpEntity<Compensation> requestEntity = new HttpEntity<>(comp, headers);
 
-		ResponseEntity<Compensation> responseEntity = this.restTemplate.postForEntity("http://localhost:" + port + "/compensation", requestEntity, Compensation.class, new HashMap<>());
+		ResponseEntity<Compensation> responseEntity = this.restTemplate.postForEntity("http://localhost:" + port + "/compensations", requestEntity, Compensation.class, new HashMap<>());
 		Compensation c = responseEntity.getBody();
 		assertEquals(employeeID, c.getEmployee().getEmployeeId());
 		assertEquals(12345, c.getSalary());
@@ -87,11 +87,11 @@ public class ChallengeApplicationTests {
 			HttpHeaders headers = new HttpHeaders();
 			HttpEntity<Compensation> requestEntity = new HttpEntity<>(comp, headers);
 
-			ResponseEntity<Compensation> responseEntity = this.restTemplate.postForEntity("http://localhost:" + port + "/compensation", requestEntity, Compensation.class, new HashMap<>());
+			ResponseEntity<Compensation> responseEntity = this.restTemplate.postForEntity("http://localhost:" + port + "/compensations", requestEntity, Compensation.class, new HashMap<>());
 		}
 		//////////////////////////////////////////////////////
 
-		ResponseEntity<Compensation[]> responseEntity = this.restTemplate.getForEntity("http://localhost:" + port + "/compensation/" + employeeID, Compensation[].class, new HashMap<>());
+		ResponseEntity<Compensation[]> responseEntity = this.restTemplate.getForEntity("http://localhost:" + port + "/compensations/" + employeeID, Compensation[].class, new HashMap<>());
 		Compensation[] c = responseEntity.getBody();
 		assertEquals(1, c.length);
 		assertEquals(employeeID, c[0].getEmployee().getEmployeeId());
@@ -102,7 +102,7 @@ public class ChallengeApplicationTests {
 	@Test
 	public void getCompensationInvalidEmployeeID() {
 		String employeeID = "fffff";
-		ResponseEntity<Compensation[]> responseEntity = this.restTemplate.getForEntity("http://localhost:" + port + "/compensation/" + employeeID, Compensation[].class, new HashMap<>());
+		ResponseEntity<Compensation[]> responseEntity = this.restTemplate.getForEntity("http://localhost:" + port + "/compensations/" + employeeID, Compensation[].class, new HashMap<>());
 		Compensation[] c = responseEntity.getBody();
 
 		assertEquals(0, c.length);
